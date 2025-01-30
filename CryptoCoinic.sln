@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCoinic.Api.Data", "CryptoCoinic.Api.Data\CryptoCoinic.Api.Data.csproj", "{AEFE7A5B-6616-4048-8E4C-7DF8E0496C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCoinic.View.WindowsForms", "CryptoCoinic.View.WindowsForms\CryptoCoinic.View.WindowsForms.csproj", "{D0DDF051-C2DA-48F0-BB97-FC84C23E8A31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoCoinic.Api.Trade", "CryptoCoinic.Api.Trade\CryptoCoinic.Api.Trade.csproj", "{07963425-5D9D-434D-AD74-7356C96D2BF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEFE7A5B-6616-4048-8E4C-7DF8E0496C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFE7A5B-6616-4048-8E4C-7DF8E0496C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFE7A5B-6616-4048-8E4C-7DF8E0496C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFE7A5B-6616-4048-8E4C-7DF8E0496C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0DDF051-C2DA-48F0-BB97-FC84C23E8A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0DDF051-C2DA-48F0-BB97-FC84C23E8A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0DDF051-C2DA-48F0-BB97-FC84C23E8A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0DDF051-C2DA-48F0-BB97-FC84C23E8A31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07963425-5D9D-434D-AD74-7356C96D2BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07963425-5D9D-434D-AD74-7356C96D2BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07963425-5D9D-434D-AD74-7356C96D2BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07963425-5D9D-434D-AD74-7356C96D2BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78A136E1-B715-49A2-AD49-32CCDA7E7CAB}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://vondarth-csprojects.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CryptoCoinic.Api.Data\\CryptoCoinic.Api.Data.csproj
+		SccProjectName1 = CryptoCoinic.Api.Data
+		SccLocalPath1 = CryptoCoinic.Api.Data
+		SccProjectUniqueName2 = CryptoCoinic.View.WindowsForms\\CryptoCoinic.View.WindowsForms.csproj
+		SccProjectName2 = CryptoCoinic.View.WindowsForms
+		SccLocalPath2 = CryptoCoinic.View.WindowsForms
+		SccProjectUniqueName3 = CryptoCoinic.Api.Trade\\CryptoCoinic.Api.Trade.csproj
+		SccProjectName3 = CryptoCoinic.Api.Trade
+		SccLocalPath3 = CryptoCoinic.Api.Trade
+	EndGlobalSection
+EndGlobal
