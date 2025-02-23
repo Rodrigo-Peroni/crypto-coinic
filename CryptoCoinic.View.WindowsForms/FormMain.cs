@@ -8,6 +8,7 @@ using System.Threading;
 using System.Timers;
 using Microsoft.VisualBasic;
 using System.Configuration;
+using System.Globalization;
 
 namespace CryptoCoinic.View.WindowsForms
 {
@@ -23,6 +24,7 @@ namespace CryptoCoinic.View.WindowsForms
         public FormMain()
         {
             InitializeComponent();
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         #region Timers & Workers
@@ -142,10 +144,10 @@ namespace CryptoCoinic.View.WindowsForms
             }
         }
 
-        private void VerifyAlert(DataContent dataContent)
+        private void VerifyAlert(Ticker ticker)
         {
-            if ((float)dataContent.Ticker.Last <= minorAlertValue ||
-                (float)dataContent.Ticker.Last >= majorAlertValue)
+            if (float.Parse(ticker.LastPrice) <= minorAlertValue ||
+                float.Parse(ticker.LastPrice) >= majorAlertValue)
             {
                 System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"c:\temp\BOMB_SIREN.wav");
                 player.Play();
@@ -181,7 +183,7 @@ namespace CryptoCoinic.View.WindowsForms
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            brokerComboBox.Text = "MercadoBitcoin";
+            brokerComboBox.Text = "Binance";
             currencyComboBox.Text = "BTC";
 
             if (ConfigurationManager.AppSettings["AutoStart"].Equals("true"))
@@ -192,19 +194,28 @@ namespace CryptoCoinic.View.WindowsForms
 
         private void UpdateData()
         {
-            string currency = null;
-            currencyComboBox.Invoke((MethodInvoker)delegate { currency = currencyComboBox.Text; });
+            string broker = null;
+            brokerComboBox.Invoke((MethodInvoker)delegate { broker = brokerComboBox.Text; });
 
-            DataContent dataContent = tickerController.GetCurrentTicker(currency);
+            string cryptoCurrency = null;           
+            currencyComboBox.Invoke((MethodInvoker)delegate { cryptoCurrency = currencyComboBox.Text; });
 
-            VerifyAlert(dataContent);
+            Ticker ticker = tickerController.GetCurrentTicker(broker, cryptoCurrency);
 
-            highLabel.Invoke((MethodInvoker)delegate { highLabel.Text = "R$ " + dataContent.Ticker.high.ToString("0.00"); });
-            lowLabel.Invoke((MethodInvoker)delegate { lowLabel.Text = "R$ " + dataContent.Ticker.Low.ToString("0.00"); });
-            volLabel.Invoke((MethodInvoker)delegate { volLabel.Text = "R$ " + dataContent.Ticker.Vol.ToString("0.00"); });
-            lastLabel.Invoke((MethodInvoker)delegate { lastLabel.Text = "R$ " + dataContent.Ticker.Last.ToString("0.00"); });
-            buyLabel.Invoke((MethodInvoker)delegate { buyLabel.Text = "R$ " + dataContent.Ticker.Buy.ToString("0.00"); });
-            sellLabel.Invoke((MethodInvoker)delegate { sellLabel.Text = "R$ " + dataContent.Ticker.Sell.ToString("0.00"); });            
+            VerifyAlert(ticker);
+
+            lastLabel.Invoke((MethodInvoker)delegate {
+                lastLabel.Text = $"{ticker.FiatCurrency} {decimal.Parse(ticker.LastPrice):F2}";
+            });
+            highLabel.Invoke((MethodInvoker)delegate {
+                highLabel.Text = $"{ticker.FiatCurrency} {decimal.Parse(ticker.HighPrice):F2}"; 
+            });
+            lowLabel.Invoke((MethodInvoker)delegate { 
+                lowLabel.Text = $"{ticker.FiatCurrency} {decimal.Parse(ticker.LowPrice):F2}";
+            });
+            volLabel.Invoke((MethodInvoker)delegate {
+                volLabel.Text = $"{decimal.Parse(ticker.Volume):F2} units";
+            });        
         }
 
     }
