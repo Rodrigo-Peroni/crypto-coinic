@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,44 +8,78 @@ namespace CryptoCoinic.Api.Data.Models
 {
     public class Ticker
     {
+        public string FiatCurrency { get; set; }
         /// <summary>
         /// Moeda a qual o Ticker se refere.
         /// </summary>
-        //public string TickerCurrency { get; set; } //ENUM
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; }
+
+        [JsonPropertyName("priceChange")]
+        public string PriceChange { get; set; }
+
+        [JsonPropertyName("priceChangePercent")]
+        public string PriceChangePercent { get; set; }
+
+        [JsonPropertyName("weightedAvgPrice")]
+        public string WeightedAvgPrice { get; set; }
+
+        [JsonPropertyName("openPrice")]
+        public string OpenPrice { get; set; }
 
         /// <summary>
         /// Maior preço unitário de negociação das últimas 24 horas.
         /// </summary>
-        public decimal high { get; set; }
+        [JsonPropertyName("highPrice")]
+        public string HighPrice { get; set; }
 
         /// <summary>
         /// Menor preço unitário de negociação das últimas 24 horas.
         /// </summary>
-        public decimal Low { get; set; }
-
-        /// <summary>
-        /// Quantidade negociada nas últimas 24 horas.
-        /// </summary>
-        public decimal Vol { get; set; }
+        [JsonPropertyName("lowPrice")]
+        public string LowPrice { get; set; }
 
         /// <summary>
         /// Preço unitário da última negociação.
         /// </summary>
-        public decimal Last { get; set; }
+        [JsonPropertyName("lastPrice")]
+        public string LastPrice { get; set; }
 
         /// <summary>
-        /// Maior preço de oferta de compra das últimas 24 horas.
+        /// Quantidade negociada nas últimas 24 horas.
         /// </summary>
-        public decimal Buy { get; set; }
+        [JsonPropertyName("volume")]
+        public string Volume { get; set; }
 
-        /// <summary>
-        /// Menor preço de oferta de venda das últimas 24 horas.
-        /// </summary>
-        public decimal Sell { get; set; }
+        [JsonPropertyName("quoteVolume")]
+        public string QuoteVolume { get; set; }
+
+        [JsonPropertyName("openTime")]
+        public long OpenTime { get; set; }
 
         /// <summary>
         /// Data e hora da informação em Era Unix.
         /// </summary>
-        public int Date { get; set; }
+        [JsonPropertyName("closeTime")]
+        public long CloseTime { get; set; }
+
+        [JsonPropertyName("firstId")]
+        public long FirstId { get; set; }
+
+        [JsonPropertyName("lastId")]
+        public long LastId { get; set; }
+
+        [JsonPropertyName("count")]
+        public long Count { get; set; }
+
+
+
+
+
+
+
+
+
+
     }
 }

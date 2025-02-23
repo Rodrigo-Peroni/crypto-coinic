@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
-using System.Threading.Tasks;
 using System.Configuration;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace CryptoCoinic.Api.Data.Controllers
 {
@@ -15,29 +11,38 @@ namespace CryptoCoinic.Api.Data.Controllers
     {
         private HttpClient client;
 
-        public TickerController(string broker) //Broker - "Enum"
+        private JsonSerializerOptions deserializationOptions = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true
+        };
+
+        public TickerController(string broker)
         {
             client = new HttpClient
             {
-                BaseAddress = new Uri(ConfigurationManager.AppSettings["URI_" + broker + "_DataApi"])
+                BaseAddress = new Uri(ConfigurationManager.AppSettings[broker + "_URI_DataApi"])
             };
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         [HttpGet, ActionName("GetCurrentTicker")]
-        public Models.DataContent GetCurrentTicker(string currency) //Currency - "Enum"
+        public Models.Ticker GetCurrentTicker(string broker, string currency)
         {           
             string tickerJson = null;
+            string fiatCurrency = ConfigurationManager.AppSettings[broker + "_Currency"].ToString();
 
-            HttpResponseMessage response = client.GetAsync("api/" + currency + "/ticker").Result;
+            HttpResponseMessage response = client.GetAsync(String.Format("/api/v3/ticker?symbol={0}{1}T", currency, fiatCurrency)).Result;
             if (response.IsSuccessStatusCode)
             {
                 tickerJson = response.Content.ReadAsStringAsync().Result;
             }
 
-            var ticker = JsonConvert.DeserializeObject<Models.DataContent>(tickerJson);
-            return (Models.DataContent)ticker;
+            Models.Ticker ticker = JsonSerializer.Deserialize<Models.Ticker>(tickerJson, deserializationOptions);
+            ticker.FiatCurrency = fiatCurrency;
+
+            return ticker;
         }
 
     }
